@@ -1,7 +1,7 @@
 {
- "updated_at": "2026-09-19T23:56+08:00",
- "count": 16,
- "open_count": 6,
+ "updated_at": "2026-09-20T00:11+08:00",
+ "count": 31,
+ "open_count": 9,
  "items": [
   {
    "title": "关于开展2026年度教师培训实践案例征集活动的通知",
@@ -13,8 +13,26 @@
    "status": "报名中"
   },
   {
+   "title": "阅读新时代 共话成长路——我与《班主任之友》独一无二的故事【主题征文】",
+   "url": "http://www.bzrzy.cn/2026/0817/c29001a202344/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-08-17",
+   "deadline": "2026-09-20",
+   "status": "报名中"
+  },
+  {
    "title": "关于召开中国教育学会地理教学专业委员会2026年综合学术年会本科师范生教学展示交流活动的通知",
    "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5042",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-07-13",
+   "deadline": "2026-09-30",
+   "status": "报名中"
+  },
+  {
+   "title": "关于召开中国教育学会地理教学专业委员会2026年综合学术年会本科师范生教学展示交流活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5042",
    "source": "中国教育学会",
    "level": "society",
    "publish_date": "2026-07-13",
@@ -40,6 +58,15 @@
    "status": "报名中"
   },
   {
+   "title": "关于开展2026年青少年网络素养培育与创新成果征集活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5037",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-07-08",
+   "deadline": "2026-10-10",
+   "status": "报名中"
+  },
+  {
    "title": "“新蕾杯”第十八届全国中小学生作文大赛",
    "url": "https://www.cnddjy.com/Column.asp?Model=Content_Detail&Column_ID=20021&C_ID=20013049",
    "source": "当代教育科研网",
@@ -56,6 +83,24 @@
    "publish_date": "2026-01-30",
    "deadline": "2026-12-31",
    "status": "报名中"
+  },
+  {
+   "title": "天津市第七届中小学班主任技能大赛（2026年市级赛事，市级决赛进行中）",
+   "url": "http://news.enorth.com.cn/system/2026/09/01/059715155.shtml",
+   "source": "天津市教委（北方网转载）",
+   "level": "city",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "第三届全国中小学班主任基本功展示交流活动典型案例名单（第四届启动时自动更新）",
+   "url": "https://hudong.moe.gov.cn/srcsite/A06/s3321/202605/t20260509_1436036.html",
+   "source": "教育部",
+   "level": "national",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
   },
   {
    "title": "“外研社杯”全国中小学英语教师教学能力与风采展评（课件/教案/论文/课堂实录）",
@@ -112,6 +157,69 @@
    "status": "进行中"
   },
   {
+   "title": "案例评析：当“AI维权书”闯入家校沟通（中学版征稿）",
+   "url": "http://www.bzrzy.cn/2026/0916/c29001a203193/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-09-16",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "案例评析：愤怒，委屈，欣然改错（小学版征稿）",
+   "url": "http://www.bzrzy.cn/2026/0829/c29001a202483/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-08-29",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "案例评析：不做夹心板，如何解决学生与年级部的冲突？（中学版征稿）",
+   "url": "http://www.bzrzy.cn/2026/0820/c29001a202358/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-08-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "【小学版专题征稿】入职、晋升、荣休——那些尊师惠师的举措",
+   "url": "http://www.bzrzy.cn/2026/0717/c29001a202098/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-07-17",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "中学专题征稿：学生“问题行为”干预工具箱",
+   "url": "http://www.bzrzy.cn/2026/0630/c29001a201565/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-06-30",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "案例评析：篮球赛风波（小学案例征稿）",
+   "url": "http://www.bzrzy.cn/2026/0629/c29001a201539/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-06-29",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "案例评析：我怎么就成了众矢之的？（中学案例征稿）",
+   "url": "http://www.bzrzy.cn/2026/0618/c29001a201155/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-06-18",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
    "title": "第七届中华经典诵写讲大赛总结展示暨第八届大赛启动活动举办",
    "url": "https://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202605/t20260528_1438039.html",
    "source": "教育部",
@@ -126,6 +234,15 @@
    "source": "教育部",
    "level": "national",
    "publish_date": "2026-05-28",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "案例评析：老师，你为什么不表扬我家小林？（中学版征稿）",
+   "url": "http://www.bzrzy.cn/2026/0518/c29001a199207/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-05-18",
    "deadline": null,
    "status": "进行中"
   },
@@ -146,6 +263,24 @@
    "publish_date": "2026-09-18",
    "deadline": null,
    "status": "公示"
+  },
+  {
+   "title": "关于开展2026年度基础教育评价改革典型案例征集活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5036",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-07-08",
+   "deadline": "2026-08-31",
+   "status": "已截止"
+  },
+  {
+   "title": "关于开展中国教育学会班主任专业委员会2026年学术年会案例征集活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5032",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-06-26",
+   "deadline": "2026-08-31",
+   "status": "已截止"
   }
  ]
 }
