@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-09-19T23:42+08:00",
- "count": 11,
+ "updated_at": "2026-09-19T23:51+08:00",
+ "count": 16,
  "open_count": 6,
  "items": [
   {
@@ -56,6 +56,51 @@
    "publish_date": "2026-01-30",
    "deadline": "2026-12-31",
    "status": "报名中"
+  },
+  {
+   "title": "“外研社杯”全国中小学英语教师教学能力与风采展评（课件/教案/论文/课堂实录）",
+   "url": "https://paper.i21st.cn/m/story/87961.html",
+   "source": "外研社·21世纪英语教育",
+   "level": "society",
+   "publish_date": "2026-09-19",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "“外研社杯”全国中学生外语素养大赛（指导教师可获证书，官网）",
+   "url": "https://events.fltrp.com/",
+   "source": "外研社",
+   "level": "society",
+   "publish_date": "2026-09-19",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "“学科网杯”全国中小学教师命卷大赛",
+   "url": "https://news.zxxk.com/article/1098935.html",
+   "source": "学科网",
+   "level": "society",
+   "publish_date": "2026-09-19",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "第四届“京师杯”中小幼教师数字化教学能力展示活动（证书查询/下载）",
+   "url": "https://www.jsjyzy.com/activity",
+   "source": "京师教育资源网",
+   "level": "society",
+   "publish_date": "2026-09-19",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "第31届“21世纪杯”全国英语演讲比赛（指导教师可获证书）",
+   "url": "https://sfs.upc.edu.cn/2026/0416/c16785a487844/page.htm",
+   "source": "中国日报社21世纪英语教育",
+   "level": "society",
+   "publish_date": "2026-09-19",
+   "deadline": null,
+   "status": "进行中"
   },
   {
    "title": "2026年“基础教育精品课”遴选工作正式启动",
