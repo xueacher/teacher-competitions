@@ -229,6 +229,21 @@ def parse_eol(soup, base):
     return items
 
 
+def parse_fltrp(soup, base):
+    """外研社官网-外研动态列表：<li><a href="/c/2026-09-18/543319.shtml">标题</a><span>2026-09-18</span></li>"""
+    items = []
+    for li in soup.find_all("li"):
+        a = li.find("a", href=True)
+        span = li.find("span")
+        if not (a and span):
+            continue
+        m = re.fullmatch(r"\s*(20\d{2}-\d{2}-\d{2})\s*", span.get_text())
+        if m and re.search(r"/c/20\d{6}/\d+\.shtml$", a["href"]):
+            items.append((a.get_text(strip=True), urljoin(base, a["href"]),
+                          m.group(1), None))
+    return items
+
+
 def fetch_cnddjy(api_url, base):
     """当代教育科研网：列表页由 JSON 接口提供（/Json/GetSearchContent.asp）"""
     r = requests.get(api_url, headers={
@@ -283,6 +298,29 @@ SOURCES = [
          base="https://www.tjbc.gov.cn/zwgk/zfxxgk/xxgk_wbj/zjyq_xxgk_jyj/"
                "xxgk_fdzdgk_jyj/xxgk_zdmsxx_jyj/xxgk_jy_jyj/",
          pages=[None, "index_1.html"]),
+    dict(name="外研社", level="society", parse=parse_fltrp, strict=False,
+         base="https://www.fltrp.com/xwdt/",
+         pages=[None]),
+]
+
+# ---------- 固定监控条目 ----------
+# 民办机构赛事的通知/官网页面（无稳定列表页可抓，逐日检查截止日期与状态）
+CURATED = [
+    dict(title="“外研社杯”全国中小学英语教师教学能力与风采展评（课件/教案/论文/课堂实录）",
+         url="https://paper.i21st.cn/m/story/87961.html",
+         source="外研社·21世纪英语教育", level="society"),
+    dict(title="“外研社杯”全国中学生外语素养大赛（指导教师可获证书，官网）",
+         url="https://events.fltrp.com/",
+         source="外研社", level="society"),
+    dict(title="“学科网杯”全国中小学教师命卷大赛",
+         url="https://news.zxxk.com/article/1098935.html",
+         source="学科网", level="society"),
+    dict(title="第四届“京师杯”中小幼教师数字化教学能力展示活动（证书查询/下载）",
+         url="https://www.jsjyzy.com/activity",
+         source="京师教育资源网", level="society"),
+    dict(title="第31届“21世纪杯”全国英语演讲比赛（指导教师可获证书）",
+         url="https://sfs.upc.edu.cn/2026/0416/c16785a487844/page.htm",
+         source="中国日报社21世纪英语教育", level="society"),
 ]
 
 
@@ -441,7 +479,7 @@ def main():
         text = it.pop("_inline", None)
         try:
             dl = extract_deadline(text) if text else None
-            if dl is None:
+            if dl is None and not url.endswith(".pdf"):
                 if fetched >= MAX_DETAIL_FETCH:
                     continue
                 fetcher = DETAIL_FETCHERS.get(it["source"], detail_text)
@@ -454,6 +492,26 @@ def main():
             print("  [警告] 详情页抓取失败 %s: %s" % (url, e), file=sys.stderr)
         except Exception as e:  # noqa: BLE001
             print("  [警告] 详情页抓取失败 %s: %s" % (url, e), file=sys.stderr)
+
+    # 固定监控条目：标题固定，每天重抓截止日期（不受详情抓取上限约束）
+    today = date.today()
+    for ce in CURATED:
+        url = ce["url"]
+        if url in seen:
+            continue
+        old = history.get(url)
+        it = dict(title=ce["title"], url=url, source=ce["source"], level=ce["level"],
+                  publish_date=(old or {}).get("publish_date") or today.isoformat(),
+                  deadline=(old or {}).get("deadline"), status="")
+        if not url.endswith(".pdf"):
+            try:
+                fetcher = DETAIL_FETCHERS.get(ce["source"], detail_text)
+                dl = extract_deadline(fetcher(url))
+                it["deadline"] = (dl.isoformat() if dl else None) or it["deadline"]
+                time.sleep(0.4)
+            except Exception as e:  # noqa: BLE001
+                print("  [警告] 固定条目检查失败 %s: %s" % (ce["title"][:20], e), file=sys.stderr)
+        fresh[url] = it
 
     # 与历史合并：保留本轮未再出现的旧条目（来源临时故障也不丢数据）
     merged = dict(history)
