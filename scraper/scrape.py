@@ -43,7 +43,7 @@ MAX_ITEMS = 1000
 INCLUDE_RE = re.compile(
     r"比赛|大赛|竞赛|征集|评选|遴选|精品课|课例|微课|说课|论文|展示|基本功|技能|"
     r"赛课|评优|申报|选拔|推荐|展评|观摩|教学设计|作业设计|优秀案例|评比|"
-    r"成果奖|评审|优质课|教学成果"
+    r"成果奖|评审|优质课|教学成果|课题"
 )
 # 对"新闻动态"类来源使用更严格的关键词（避免教研新闻混入）
 STRICT_INCLUDE_RE = re.compile(
@@ -63,6 +63,8 @@ DEADLINE_RES = [
     re.compile(r"(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?\s*(?:前|止|截止|之前)"),
     re.compile(r"截止(?:时间|日期)?\s*[:：]?\s*(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})"),
     re.compile(r"(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?\s*(?:前完成|前提交|前报送|前上报|前上传|前申报|前报名)"),
+    re.compile(r"即日起至\s*(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?"),
+    re.compile(r"(?:申报|报名|提交|报送|上传)(?:时间)?[^。；]{0,12}至\s*(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?"),
     re.compile(r"(\d{1,2})\s*月\s*(\d{1,2})\s*日\s*前"),   # 无年份，用上下文推断
 ]
 DEADLINE_DONE_RE = re.compile(r"截至|已于.{0,6}(截止|结束)|(报名|申报|提交).{0,10}(截止|结束)")
@@ -227,6 +229,31 @@ def parse_eol(soup, base):
     return items
 
 
+def fetch_cnddjy(api_url, base):
+    """当代教育科研网：列表页由 JSON 接口提供（/Json/GetSearchContent.asp）"""
+    r = requests.get(api_url, headers={
+        "User-Agent": UA,
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": "https://www.cnddjy.com/",
+    }, timeout=TIMEOUT)
+    if r.status_code != 200:
+        raise RuntimeError("HTTP %s" % r.status_code)
+    data = r.json()
+    items = []
+    for row in data.get("rows", []):
+        title = (row.get("C_Title") or "").strip()
+        link = (row.get("C_Link") or "").strip()
+        if not (title and link):
+            continue
+        m = re.match(r"\s*(\d{4})/(\d{1,2})/(\d{1,2})", row.get("C_AddDate") or "")
+        if not m:
+            continue
+        y, mo, d = (int(x) for x in m.groups())
+        inline = (row.get("C_Leadin") or "").strip() or None
+        items.append((title, urljoin(base, link), "%04d-%02d-%02d" % (y, mo, d), inline))
+    return items
+
+
 # ---------- 来源配置 ----------
 # pages: 抓取的列表页（None 表示栏目首页）；strict: 使用更严格的标题关键词
 SOURCES = [
@@ -239,6 +266,10 @@ SOURCES = [
     dict(name="中国教育学会", level="society", parse=parse_cse, strict=False,
          base="http://www.cse.edu.cn/index/index.html?category=118",
          pages=["", "?category=118&page=2", "?category=118&page=3"]),
+    dict(name="当代教育科研网", level="society", parse=None, strict=False,
+         base="https://www.cnddjy.com/",
+         api="https://www.cnddjy.com/Json/GetSearchContent.asp?rows=20&DisplyObj=image&Column=20021",
+         pages=[1, 2, 3]),
     dict(name="天津市教育委员会", level="city", parse=parse_jy, strict=False,
          base="https://jy.tj.gov.cn/ZWGK_52172/TZGG/",
          pages=[None]),
@@ -262,15 +293,20 @@ def scrape_lists():
         name, level, strict = src["name"], src["level"], src.get("strict", False)
         got_any = False
         for page in src["pages"]:
-            url = src["base"] if page is None else urljoin(src["base"], page)
             try:
-                soup = http_get(url)
-                items = src["parse"](soup, src["base"])
+                if src.get("api"):
+                    # JSON 接口型来源
+                    api_url = src["api"] + ("&page=%d" % page)
+                    items = fetch_cnddjy(api_url, src["base"])
+                else:
+                    url = src["base"] if page is None else urljoin(src["base"], page)
+                    soup = http_get(url)
+                    items = src["parse"](soup, src["base"])
                 for title, link, d, inline in items:
                     out.append((title, link, d, inline, name, level, strict))
                 got_any = True
             except Exception as e:  # noqa: BLE001
-                print("  [警告] %s %s 抓取失败: %s" % (name, url, e), file=sys.stderr)
+                print("  [警告] %s 抓取失败: %s" % (name, e), file=sys.stderr)
         if got_any:
             print("  [OK] %-10s 抓取完成" % name)
     return out
@@ -319,6 +355,27 @@ def detail_text(url):
     for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
     return re.sub(r"\s+", " ", soup.get_text(" ")).strip()
+
+
+def fetch_cnddjy_detail(url):
+    """当代教育科研网详情正文接口（action=GetShow）"""
+    m = re.search(r"C_ID=(\d+)", url)
+    if not m:
+        raise RuntimeError("no C_ID in url")
+    r = requests.get("https://www.cnddjy.com/Json/GetSearchContent.asp",
+                     params={"action": "GetShow", "DisplyObj": "field,picture",
+                             "C_ID": m.group(1)},
+                     headers={"User-Agent": UA, "X-Requested-With": "XMLHttpRequest",
+                              "Referer": "https://www.cnddjy.com/"},
+                     timeout=TIMEOUT)
+    d = r.json()
+    body = d.get("OVD_Description0") or ""
+    text = re.sub(r"<[^>]+>", " ", body)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+# 某些来源的详情页需走专用接口（否则用通用 HTML 抓取）
+DETAIL_FETCHERS = {"当代教育科研网": fetch_cnddjy_detail}
 
 
 def calc_status(title, deadline):
@@ -380,15 +437,15 @@ def main():
         if not need:
             it.pop("_inline", None)
             continue
-        # 优先用列表页自带的摘要/全文，其次抓详情页
+        # 优先用列表页自带的摘要/全文提取截止日期，提取不到再抓详情页
         text = it.pop("_inline", None)
         try:
-            if text:
-                dl = extract_deadline(text)
-            else:
+            dl = extract_deadline(text) if text else None
+            if dl is None:
                 if fetched >= MAX_DETAIL_FETCH:
                     continue
-                text = detail_text(url)
+                fetcher = DETAIL_FETCHERS.get(it["source"], detail_text)
+                text = fetcher(url)
                 fetched += 1
                 time.sleep(0.4)
                 dl = extract_deadline(text)
@@ -414,7 +471,14 @@ def main():
             pd = date.fromisoformat(it["publish_date"])
         except ValueError:
             pd = date.today()
-        if pd < cutoff:
+        # 发布超过保留期则清理；但截止日期仍在未来的长期征集活动保留
+        dl_date = None
+        if it.get("deadline"):
+            try:
+                dl_date = date.fromisoformat(it["deadline"])
+            except ValueError:
+                pass
+        if pd < cutoff and not (dl_date and dl_date >= date.today()):
             continue
         it["status"] = calc_status(it["title"], it.get("deadline"))
         items.append(it)
