@@ -352,6 +352,21 @@ CURATED = [
     dict(title="第三届全国中小学班主任基本功展示交流活动典型案例名单（第四届启动时自动更新）",
          url="https://hudong.moe.gov.cn/srcsite/A06/s3321/202605/t20260509_1436036.html",
          source="教育部", level="national"),
+    dict(title="2026年全国师生数字素养提升实践活动（第30届教师活动，省级报名9月1-20日）",
+         url="https://huodong.ncet.edu.cn/hd/dndsteacher",
+         source="中央电化教育馆", level="national", deadline="2026-09-20"),
+    dict(title="天津市教育学会基础教育“教育创新”论文评选（每年一届，2027年度关注中）",
+         url="https://www.tjhx.gov.cn/hxxw/hxdt/202606/t20260601_7308832.html",
+         source="天津市教育学会", level="city"),
+    dict(title="《中小学外语教学》杂志2026年选题建议（北大核心期刊，英语教师投稿）",
+         url="https://flts.bnu.edu.cn/node/16803",
+         source="北师大·中小学外语教学", level="society"),
+    dict(title="中国教育技术协会第三届教育信息技术应用创新大赛（中小学AI教学创新赛）",
+         url="https://nic.xaut.edu.cn/info/11677/332658.htm",
+         source="中国教育技术协会", level="society"),
+    dict(title="中国电子学会中小学人工智能教育教学成果大赛（与北师大合办，发证书）",
+         url="https://px.cie.org.cn/portal/article/index/id/1367/cid/1.html",
+         source="中国电子学会", level="society"),
 ]
 
 
@@ -545,7 +560,7 @@ def main():
         old = history.get(url)
         it = dict(title=ce["title"], url=url, source=ce["source"], level=ce["level"],
                   publish_date=(old or {}).get("publish_date") or today.isoformat(),
-                  deadline=(old or {}).get("deadline"), status="")
+                  deadline=ce.get("deadline") or (old or {}).get("deadline"), status="")
         if not url.endswith(".pdf"):
             try:
                 fetcher = DETAIL_FETCHERS.get(ce["source"], detail_text)
@@ -567,6 +582,7 @@ def main():
     # 清理过期条目、更新状态、排序
     cutoff = date.today() - timedelta(days=KEEP_DAYS)
     items = []
+    seen_titles = set()
     for url, it in merged.items():
         if not it.get("publish_date"):
             continue  # 无法确定发布日期的条目直接丢弃
@@ -574,6 +590,11 @@ def main():
             pd = date.fromisoformat(it["publish_date"])
         except ValueError:
             pd = date.today()
+        # 同一通知常被不同栏目/渠道重复收录，按标题去重（保留先遇到的一条）
+        tkey = re.sub(r"\s+", "", it["title"])
+        if tkey in seen_titles:
+            continue
+        seen_titles.add(tkey)
         # 发布超过保留期则清理；但截止日期仍在未来的长期征集活动保留
         dl_date = None
         if it.get("deadline"):
