@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>天津教师比赛速览</title>
+<meta name="theme-color" content="#2563eb">
+<meta name="description" content="汇总国家级、天津市级、区级教师比赛通知，每日自动更新">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{
+  --blue:#2563eb; --bg:#f3f5f9; --card:#fff; --text:#1f2937; --sub:#6b7280;
+  --line:#e5e7eb;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);font-size:15px;line-height:1.55;
+  padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:0 12px}
+
+/* 头部 */
+header{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;
+  padding:22px 0 46px;border-radius:0 0 24px 24px}
+header .wrap{display:flex;align-items:center;gap:12px}
+header img{width:44px;height:44px;border-radius:10px;background:#fff;padding:6px}
+header h1{font-size:20px;font-weight:700}
+header .sub{font-size:12.5px;opacity:.9;margin-top:2px}
+header .sub .dot{opacity:.7}
+
+/* 统计条 */
+.stats{display:flex;gap:10px;margin:-30px 12px 14px}
+.stat{flex:1;background:var(--card);border-radius:14px;padding:10px 12px;
+  box-shadow:0 2px 10px rgba(31,41,55,.07);text-align:center}
+.stat b{font-size:19px;display:block}
+.stat span{font-size:12px;color:var(--sub)}
+.stat.open b{color:#16a34a}.stat.all b{color:var(--blue)}
+
+/* 筛选区 */
+.filters{display:flex;gap:8px;overflow-x:auto;padding:2px 12px 10px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;padding:6px 14px;border-radius:999px;background:#fff;
+  border:1px solid var(--line);font-size:13px;color:#4b5563;cursor:pointer;user-select:none}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.chip.status-open.on{background:#16a34a;border-color:#16a34a}
+.chip.status-closed.on{background:#6b7280;border-color:#6b7280}
+
+/* 搜索框 */
+.search{margin:0 12px 14px}
+.search input{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--line);
+  background:#fff;font-size:14px;outline:none}
+.search input:focus{border-color:var(--blue)}
+
+/* 列表 */
+.card{background:var(--card);border-radius:14px;padding:13px 14px;margin:0 12px 10px;
+  box-shadow:0 1px 4px rgba(31,41,55,.05)}
+.card .badges{display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600}
+.badge.lev{background:#eef2ff;color:#4338ca}
+.badge.st-open{background:#dcfce7;color:#15803d}
+.badge.st-ing{background:#dbeafe;color:#1d4ed8}
+.badge.st-pub{background:#fef3c7;color:#b45309}
+.badge.st-closed{background:#f3f4f6;color:#6b7280}
+.card a.title{display:block;color:var(--text);text-decoration:none;font-weight:600;font-size:15px}
+.card a.title:active{color:var(--blue)}
+.card .meta{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 10px}
+.card .meta .dl{color:#dc2626;font-weight:600}
+.card .meta .dl.ok{color:#16a34a}
+.empty{text-align:center;color:var(--sub);padding:48px 20px;font-size:14px}
+.empty .big{font-size:40px;margin-bottom:8px}
+
+/* 底部 */
+footer{margin:26px 12px 40px;background:#fff;border-radius:14px;padding:14px;
+  font-size:12.5px;color:var(--sub)}
+footer h3{font-size:14px;color:var(--text);margin-bottom:8px}
+footer ul{padding-left:18px;margin-bottom:10px}
+footer li{margin:2px 0}
+footer details{margin-top:8px}
+footer summary{color:var(--blue);cursor:pointer;font-weight:600}
+footer .steps{padding-left:18px;margin-top:6px}
+footer .steps li{margin:4px 0}
+#err{display:none;text-align:center;padding:40px 20px;color:var(--sub)}
+#err button{margin-top:12px;padding:8px 20px;border-radius:999px;border:none;
+  background:var(--blue);color:#fff;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="icon-192.png" alt="图标">
+    <div>
+      <h1>天津教师比赛速览</h1>
+      <div class="sub" id="updated">正在加载…</div>
+    </div>
+  </div>
+</header>
+
+<div class="stats" id="stats">
+  <div class="stat open"><b id="openCnt">-</b><span>报名中</span></div>
+  <div class="stat all"><b id="allCnt">-</b><span>全部通知</span></div>
+</div>
+
+<div class="filters" id="levelChips"></div>
+<div class="filters" id="statusChips"></div>
+
+<div class="search"><input id="q" type="search" placeholder="🔍 搜索：英语 / 精品课 / 论文…"></div>
+
+<div id="err">
+  数据加载失败，请检查网络后重试
+  <br><button onclick="load()">重新加载</button>
+</div>
+<div id="list"></div>
+<div class="empty" id="empty" style="display:none">
+  <div class="big">🔍</div>没有符合条件的比赛通知
+</div>
+
+<footer>
+  <h3>📌 数据来源（每日 06:30 自动更新）</h3>
+  <ul>
+    <li>国家级：教育部、中国教育学会</li>
+    <li>天津市级：天津市教育委员会、天津市教科院</li>
+    <li>区级：北辰区政府、北辰区教育局</li>
+  </ul>
+  <div>📱 安装到手机桌面，像 App 一样使用：</div>
+  <details>
+    <summary>点击查看安装方法</summary>
+    <ol class="steps">
+      <li><b>iPhone（Safari）</b>：底部「分享」按钮 →「添加到主屏幕」</li>
+      <li><b>安卓（Chrome）</b>：右上角「⋮」菜单 →「添加到主屏幕 / 安装应用」</li>
+      <li><b>微信内打开</b>：右上角「···」→「在浏览器中打开」再按上面操作</li>
+    </ol>
+  </details>
+  <div style="margin-top:8px">⚠️ 通知内容以官方原文为准，请点开链接查看完整要求。</div>
+</footer>
+
+<script>
+const LEVELS = {national:"国家级", city:"市级", district:"区级", society:"学会"};
+const STATUS = {all:"全部", "报名中":"报名中", "进行中":"进行中", "公示":"公示", "已截止":"已截止"};
+const statusCls = {"报名中":"st-open","进行中":"st-ing","公示":"st-pub","已截止":"st-closed"};
+let data = null;
+let filter = {level:"全部", status:"全部", q:""};
+
+function load(){
+  document.getElementById("err").style.display = "none";
+  fetch("data/competitions.json")
+    .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => { data = d; render(); })
+    .catch(() => { document.getElementById("err").style.display = "block"; });
+}
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function fmtDate(iso){
+  if(!iso) return "";
+  const p = iso.split("-").map(Number);
+  return p[1] + "月" + p[2] + "日";
+}
+function daysLeft(deadline){
+  if(!deadline) return null;
+  const t = new Date(deadline + "T00:00:00") - new Date(new Date().toDateString());
+  return Math.round(t / 86400000);
+}
+
+function render(){
+  const u = document.getElementById("updated");
+  if(data && data.updated_at){
+    u.innerHTML = "每日自动更新 · 最近更新 " + data.updated_at.slice(5,16).replace("T"," ");
+  }
+  document.getElementById("allCnt").textContent = data ? data.count : "-";
+  document.getElementById("openCnt").textContent = data ? data.open_count : "-";
+
+  // 筛选 chips（只生成一次）
+  if(!document.getElementById("levelChips").children.length){
+    makeChips("levelChips", ["全部","国家级","市级","区级","学会"], v => { filter.level = v; renderList(); });
+    makeChips("statusChips", Object.keys(STATUS), v => { filter.status = v; renderList(); });
+  }
+  renderList();
+}
+
+function makeChips(elId, vals, onPick){
+  const el = document.getElementById(elId);
+  vals.forEach((v, i) => {
+    const c = document.createElement("div");
+    c.className = "chip" + (i === 0 ? " on" : "") +
+      (v === "报名中" ? " status-open" : "") + (v === "已截止" ? " status-closed" : "");
+    c.textContent = v;
+    c.onclick = () => {
+      el.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
+      c.classList.add("on");
+      onPick(v);
+    };
+    el.appendChild(c);
+  });
+}
+
+function renderList(){
+  if(!data) return;
+  const q = filter.q.trim();
+  const items = data.items.filter(it =>
+    (filter.level === "全部" || LEVELS[it.level] === filter.level) &&
+    (filter.status === "全部" || it.status === filter.status) &&
+    (!q || it.title.includes(q) || (it.source||"").includes(q))
+  );
+  const list = document.getElementById("list");
+  document.getElementById("empty").style.display = items.length ? "none" : "block";
+  list.innerHTML = items.map(it => {
+    const dl = daysLeft(it.deadline);
+    let dlHtml = "";
+    if(it.deadline){
+      if(it.status === "已截止") dlHtml = `<span class="dl">已截止（${fmtDate(it.deadline)}）</span>`;
+      else if(dl >= 0) dlHtml = `<span class="dl ok">⏰ 截止 ${fmtDate(it.deadline)}（剩${dl}天）</span>`;
+      else dlHtml = `<span class="dl">⏰ 截止 ${fmtDate(it.deadline)}</span>`;
+    }
+    return `<div class="card">
+      <div class="badges">
+        <span class="badge lev">${LEVELS[it.level] || it.level}</span>
+        <span class="badge ${statusCls[it.status] || "st-ing"}">${it.status}</span>
+      </div>
+      <a class="title" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>
+      <div class="meta">
+        <span>${esc(it.source)}</span><span>发布 ${fmtDate(it.publish_date)}</span>${dlHtml}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+document.getElementById("q").addEventListener("input", e => {
+  filter.q = e.target.value; renderList();
+});
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+load();
+</script>
+</body>
+</html>

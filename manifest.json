@@ -1,0 +1,15 @@
+{
+  "name": "天津教师比赛速览",
+  "short_name": "教师比赛",
+  "description": "汇总国家级、天津市级、区级教师比赛通知，每日自动更新",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f5f9",
+  "theme_color": "#2563eb",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
