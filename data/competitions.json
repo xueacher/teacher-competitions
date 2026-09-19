@@ -1,8 +1,17 @@
 {
- "updated_at": "2026-09-20T06:40+08:00",
- "count": 31,
- "open_count": 9,
+ "updated_at": "2026-09-20T07:48+08:00",
+ "count": 33,
+ "open_count": 8,
  "items": [
+  {
+   "title": "2026年全国师生数字素养提升实践活动（第30届教师活动，省级报名9月1-20日）",
+   "url": "https://huodong.ncet.edu.cn/hd/dndsteacher",
+   "source": "中央电化教育馆",
+   "level": "national",
+   "publish_date": "2026-09-20",
+   "deadline": "2026-09-20",
+   "status": "报名中"
+  },
   {
    "title": "关于开展2026年度教师培训实践案例征集活动的通知",
    "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5098",
@@ -31,15 +40,6 @@
    "status": "报名中"
   },
   {
-   "title": "关于召开中国教育学会地理教学专业委员会2026年综合学术年会本科师范生教学展示交流活动的通知",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5042",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-07-13",
-   "deadline": "2026-09-30",
-   "status": "报名中"
-  },
-  {
    "title": "关于开展2026年青少年网络素养培育与创新成果征集活动的通知",
    "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5037",
    "source": "中国教育学会",
@@ -55,15 +55,6 @@
    "level": "society",
    "publish_date": "2026-07-08",
    "deadline": "2027-08-31",
-   "status": "报名中"
-  },
-  {
-   "title": "关于开展2026年青少年网络素养培育与创新成果征集活动的通知",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5037",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-07-08",
-   "deadline": "2026-10-10",
    "status": "报名中"
   },
   {
@@ -98,6 +89,42 @@
    "url": "https://hudong.moe.gov.cn/srcsite/A06/s3321/202605/t20260509_1436036.html",
    "source": "教育部",
    "level": "national",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "天津市教育学会基础教育“教育创新”论文评选（每年一届，2027年度关注中）",
+   "url": "https://www.tjhx.gov.cn/hxxw/hxdt/202606/t20260601_7308832.html",
+   "source": "天津市教育学会",
+   "level": "city",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "《中小学外语教学》杂志2026年选题建议（北大核心期刊，英语教师投稿）",
+   "url": "https://flts.bnu.edu.cn/node/16803",
+   "source": "北师大·中小学外语教学",
+   "level": "society",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "中国教育技术协会第三届教育信息技术应用创新大赛（中小学AI教学创新赛）",
+   "url": "https://nic.xaut.edu.cn/info/11677/332658.htm",
+   "source": "中国教育技术协会",
+   "level": "society",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "中国电子学会中小学人工智能教育教学成果大赛（与北师大合办，发证书）",
+   "url": "https://px.cie.org.cn/portal/article/index/id/1367/cid/1.html",
+   "source": "中国电子学会",
+   "level": "society",
    "publish_date": "2026-09-20",
    "deadline": null,
    "status": "进行中"
@@ -263,15 +290,6 @@
    "publish_date": "2026-09-18",
    "deadline": null,
    "status": "公示"
-  },
-  {
-   "title": "关于开展2026年度基础教育评价改革典型案例征集活动的通知",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=59&id=5036",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-07-08",
-   "deadline": "2026-08-31",
-   "status": "已截止"
   },
   {
    "title": "关于开展中国教育学会班主任专业委员会2026年学术年会案例征集活动的通知",
