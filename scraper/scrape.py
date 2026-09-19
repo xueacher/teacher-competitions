@@ -43,7 +43,7 @@ MAX_ITEMS = 1000
 INCLUDE_RE = re.compile(
     r"比赛|大赛|竞赛|征集|评选|遴选|精品课|课例|微课|说课|论文|展示|基本功|技能|"
     r"赛课|评优|申报|选拔|推荐|展评|观摩|教学设计|作业设计|优秀案例|评比|"
-    r"成果奖|评审|优质课|教学成果|课题"
+    r"成果奖|评审|优质课|教学成果|课题|征文|征稿"
 )
 # 对"新闻动态"类来源使用更严格的关键词（避免教研新闻混入）
 STRICT_INCLUDE_RE = re.compile(
@@ -65,7 +65,7 @@ DEADLINE_RES = [
     re.compile(r"(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?\s*(?:前完成|前提交|前报送|前上报|前上传|前申报|前报名)"),
     re.compile(r"即日起至\s*(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?"),
     re.compile(r"(?:申报|报名|提交|报送|上传)(?:时间)?[^。；]{0,12}至\s*(20\d{2})\s*[年\-/.]\s*(\d{1,2})\s*[月\-/.]\s*(\d{1,2})\s*日?"),
-    re.compile(r"(\d{1,2})\s*月\s*(\d{1,2})\s*日\s*前"),   # 无年份，用上下文推断
+    re.compile(r"(?:(20\d{2})\s*年)?\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日\s*前"),  # 无年份或"2026年8月31日前"式
 ]
 DEADLINE_DONE_RE = re.compile(r"截至|已于.{0,6}(截止|结束)|(报名|申报|提交).{0,10}(截止|结束)")
 
@@ -119,13 +119,18 @@ def parse_cse(soup, base):
     items = []
     for li in soup.find_all("li"):
         a = li.find("a", href=True)
-        span = li.find("span")
-        if not (a and span):
+        if not a or "detail.html" not in a["href"]:
             continue
-        m = re.fullmatch(r"\s*(20\d{2})-(\d{2})-(\d{2})\s*", span.get_text())
-        if m and "detail.html" in a["href"]:
-            items.append((a.get_text(strip=True), urljoin(base, a["href"]),
-                          "%s-%s-%s" % m.groups(), None))
+        title = a.get_text(strip=True)
+        if not title:
+            continue
+        # 部分栏目（如机构通知）列表页无日期，返回 None 由详情页补取
+        date_txt = None
+        span = li.find("span")
+        if span:
+            m = re.fullmatch(r"\s*(20\d{2})-(\d{2})-(\d{2})\s*", span.get_text())
+            date_txt = "%s-%s-%s" % m.groups() if m else None
+        items.append((title, urljoin(base, a["href"]), date_txt, None))
     return items
 
 
@@ -244,6 +249,22 @@ def parse_fltrp(soup, base):
     return items
 
 
+def parse_bzrzy(soup, base):
+    """班主任之友杂志-主题征稿栏目：li > span.news_title > a[page.htm] + span.news_meta"""
+    items = []
+    for li in soup.find_all("li"):
+        nt = li.find("span", class_="news_title")
+        meta = li.find("span", class_="news_meta")
+        if not (nt and meta):
+            continue
+        a = nt.find("a", href=True)
+        m = re.fullmatch(r"\s*(20\d{2}-\d{2}-\d{2})\s*", meta.get_text())
+        if a and m and re.search(r"/page\.htm$", a["href"]):
+            items.append((a.get("title", "").strip() or a.get_text(strip=True),
+                          urljoin(base, a["href"]), m.group(1), None))
+    return items
+
+
 def fetch_cnddjy(api_url, base):
     """当代教育科研网：列表页由 JSON 接口提供（/Json/GetSearchContent.asp）"""
     r = requests.get(api_url, headers={
@@ -280,7 +301,8 @@ SOURCES = [
          pages=[None]),
     dict(name="中国教育学会", level="society", parse=parse_cse, strict=False,
          base="http://www.cse.edu.cn/index/index.html?category=118",
-         pages=["", "?category=118&page=2", "?category=118&page=3"]),
+         pages=["", "?category=118&page=2", "?category=118&page=3",
+                "?category=59", "?category=59&page=2", "?category=59&page=3"]),  # 118通知公告 + 59机构通知
     dict(name="当代教育科研网", level="society", parse=None, strict=False,
          base="https://www.cnddjy.com/",
          api="https://www.cnddjy.com/Json/GetSearchContent.asp?rows=20&DisplyObj=image&Column=20021",
@@ -300,6 +322,9 @@ SOURCES = [
          pages=[None, "index_1.html"]),
     dict(name="外研社", level="society", parse=parse_fltrp, strict=False,
          base="https://www.fltrp.com/xwdt/",
+         pages=[None]),
+    dict(name="班主任之友杂志", level="society", parse=parse_bzrzy, strict=False,
+         base="http://www.bzrzy.cn/29001/list.htm",
          pages=[None]),
 ]
 
@@ -321,6 +346,12 @@ CURATED = [
     dict(title="第31届“21世纪杯”全国英语演讲比赛（指导教师可获证书）",
          url="https://sfs.upc.edu.cn/2026/0416/c16785a487844/page.htm",
          source="中国日报社21世纪英语教育", level="society"),
+    dict(title="天津市第七届中小学班主任技能大赛（2026年市级赛事，市级决赛进行中）",
+         url="http://news.enorth.com.cn/system/2026/09/01/059715155.shtml",
+         source="天津市教委（北方网转载）", level="city"),
+    dict(title="第三届全国中小学班主任基本功展示交流活动典型案例名单（第四届启动时自动更新）",
+         url="https://hudong.moe.gov.cn/srcsite/A06/s3321/202605/t20260509_1436036.html",
+         source="教育部", level="national"),
 ]
 
 
@@ -366,10 +397,13 @@ def extract_deadline(text):
     found = []  # (date, priority, context)
     for rx in DEADLINE_RES:
         for m in rx.finditer(text):
-            y, mo, d = (m.groups() + (None,))[:3] if len(m.groups()) >= 3 else (None,) + m.groups()[:2]
-            if y is None:
+            g = m.groups()
+            if len(g) >= 3 and g[0] and g[1] and g[2]:
+                y, mo, d = int(g[0]), int(g[1]), int(g[2])
+            else:
+                mo, d = int(g[-2]), int(g[-1])
                 y = date.today().year
-                if int(mo) < date.today().month:
+                if mo < date.today().month:
                     y += 1
             try:
                 dt = date(int(y), int(mo), int(d))
@@ -457,21 +491,25 @@ def main():
         seen.add(url)
         if not keep_item(title, strict):
             continue
-        try:
-            pd = date.fromisoformat(d)
-        except ValueError:
-            continue
+        pd = None
+        if d:
+            try:
+                pd = date.fromisoformat(d)
+            except ValueError:
+                pd = None
         fresh[url] = dict(title=title, url=url, source=src_name, level=level,
-                          publish_date=pd.isoformat(), deadline=None, status="",
-                          _inline=inline)
+                          publish_date=pd.isoformat() if pd else None,
+                          deadline=None, status="", _inline=inline)
 
     print("筛选后候选 %d 条，开始提取截止日期..." % len(fresh))
     history = {} if args.refresh else load_history()
     fetched = 0
     for url, it in fresh.items():
         old = history.get(url)
-        # 新条目 或 尚无截止日期且未明确结束的旧条目 → 提取截止日期
-        need = old is None or (not old.get("deadline") and old.get("status") not in ("已截止",))
+        # 新条目、尚无截止日期、或缺少发布日期的条目 → 需要抓取详情
+        need = (old is None
+                or (not old.get("deadline") and old.get("status") not in ("已截止",))
+                or it["publish_date"] is None)
         if not need:
             it.pop("_inline", None)
             continue
@@ -488,6 +526,11 @@ def main():
                 time.sleep(0.4)
                 dl = extract_deadline(text)
             it["deadline"] = dl.isoformat() if dl else None
+            # 列表页无日期的来源（如学会机构通知），从详情页补发布日期
+            if text and it["publish_date"] is None:
+                dm = re.search(r"时间[：:]\s*(20\d{2})-(\d{2})-(\d{2})", text)
+                if dm:
+                    it["publish_date"] = "%s-%s-%s" % dm.groups()
         except Exception as e:  # noqa: BLE001
             print("  [警告] 详情页抓取失败 %s: %s" % (url, e), file=sys.stderr)
         except Exception as e:  # noqa: BLE001
@@ -525,6 +568,8 @@ def main():
     cutoff = date.today() - timedelta(days=KEEP_DAYS)
     items = []
     for url, it in merged.items():
+        if not it.get("publish_date"):
+            continue  # 无法确定发布日期的条目直接丢弃
         try:
             pd = date.fromisoformat(it["publish_date"])
         except ValueError:
