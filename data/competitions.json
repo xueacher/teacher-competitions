@@ -1,7 +1,7 @@
 {
- "updated_at": "2026-09-19T23:14+08:00",
- "count": 8,
- "open_count": 4,
+ "updated_at": "2026-09-19T23:24+08:00",
+ "count": 11,
+ "open_count": 6,
  "items": [
   {
    "title": "关于开展2026年度教师培训实践案例征集活动的通知",
@@ -40,6 +40,24 @@
    "status": "报名中"
   },
   {
+   "title": "“新蕾杯”第十八届全国中小学生作文大赛",
+   "url": "https://www.cnddjy.com/Column.asp?Model=Content_Detail&Column_ID=20021&C_ID=20013049",
+   "source": "当代教育科研网",
+   "level": "society",
+   "publish_date": "2026-03-24",
+   "deadline": "2026-12-31",
+   "status": "报名中"
+  },
+  {
+   "title": "关于征集2026年度全国教育教学科研成果的通知",
+   "url": "https://www.cnddjy.com/Column.asp?Model=Content_Detail&Column_ID=20021&C_ID=9713",
+   "source": "当代教育科研网",
+   "level": "society",
+   "publish_date": "2026-01-30",
+   "deadline": "2026-12-31",
+   "status": "报名中"
+  },
+  {
    "title": "2026年“基础教育精品课”遴选工作正式启动",
    "url": "https://www.eol.cn/news/yaowen/202609/t20260917_2774914.shtml",
    "source": "中国教育在线",
@@ -63,6 +81,15 @@
    "source": "教育部",
    "level": "national",
    "publish_date": "2026-05-28",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "关于开展2026年度全国青少年“汉字故事展演展示”活动的通知",
+   "url": "https://www.cnddjy.com/Column.asp?Model=Content_Detail&Column_ID=20021&C_ID=696027470",
+   "source": "当代教育科研网",
+   "level": "society",
+   "publish_date": "2026-05-12",
    "deadline": null,
    "status": "进行中"
   },
