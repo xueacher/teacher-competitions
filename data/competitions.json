@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-09-20T07:53+08:00",
- "count": 33,
+ "updated_at": "2026-09-21T06:41+08:00",
+ "count": 34,
  "open_count": 8,
  "items": [
   {
@@ -125,6 +125,15 @@
    "url": "https://px.cie.org.cn/portal/article/index/id/1367/cid/1.html",
    "source": "中国电子学会",
    "level": "society",
+   "publish_date": "2026-09-20",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "第48届世界技能大赛中国代表团集结动员",
+   "url": "https://www.eol.cn/news/yaowen/202609/t20260920_2776129.shtml",
+   "source": "中国教育在线",
+   "level": "national",
    "publish_date": "2026-09-20",
    "deadline": null,
    "status": "进行中"
