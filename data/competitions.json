@@ -1,35 +1,8 @@
 {
- "updated_at": "2026-09-21T06:41+08:00",
- "count": 34,
- "open_count": 8,
+ "updated_at": "2026-09-22T06:42+08:00",
+ "count": 35,
+ "open_count": 5,
  "items": [
-  {
-   "title": "2026年全国师生数字素养提升实践活动（第30届教师活动，省级报名9月1-20日）",
-   "url": "https://huodong.ncet.edu.cn/hd/dndsteacher",
-   "source": "中央电化教育馆",
-   "level": "national",
-   "publish_date": "2026-09-20",
-   "deadline": "2026-09-20",
-   "status": "报名中"
-  },
-  {
-   "title": "关于开展2026年度教师培训实践案例征集活动的通知",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5098",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-08-24",
-   "deadline": "2026-09-20",
-   "status": "报名中"
-  },
-  {
-   "title": "阅读新时代 共话成长路——我与《班主任之友》独一无二的故事【主题征文】",
-   "url": "http://www.bzrzy.cn/2026/0817/c29001a202344/page.htm",
-   "source": "班主任之友杂志",
-   "level": "society",
-   "publish_date": "2026-08-17",
-   "deadline": "2026-09-20",
-   "status": "报名中"
-  },
   {
    "title": "关于召开中国教育学会地理教学专业委员会2026年综合学术年会本科师范生教学展示交流活动的通知",
    "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5042",
@@ -74,6 +47,15 @@
    "publish_date": "2026-01-30",
    "deadline": "2026-12-31",
    "status": "报名中"
+  },
+  {
+   "title": "中国教育学会关于印发《中国教育学会关于进一步做好国家教学成果推广应用工作的意见》的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5134",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-09-21",
+   "deadline": null,
+   "status": "进行中"
   },
   {
    "title": "天津市第七届中小学班主任技能大赛（2026年市级赛事，市级决赛进行中）",
@@ -299,6 +281,33 @@
    "publish_date": "2026-09-18",
    "deadline": null,
    "status": "公示"
+  },
+  {
+   "title": "2026年全国师生数字素养提升实践活动（第30届教师活动，省级报名9月1-20日）",
+   "url": "https://huodong.ncet.edu.cn/hd/dndsteacher",
+   "source": "中央电化教育馆",
+   "level": "national",
+   "publish_date": "2026-09-20",
+   "deadline": "2026-09-20",
+   "status": "已截止"
+  },
+  {
+   "title": "关于开展2026年度教师培训实践案例征集活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5098",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-08-24",
+   "deadline": "2026-09-20",
+   "status": "已截止"
+  },
+  {
+   "title": "阅读新时代 共话成长路——我与《班主任之友》独一无二的故事【主题征文】",
+   "url": "http://www.bzrzy.cn/2026/0817/c29001a202344/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-08-17",
+   "deadline": "2026-09-20",
+   "status": "已截止"
   },
   {
    "title": "关于开展中国教育学会班主任专业委员会2026年学术年会案例征集活动的通知",
