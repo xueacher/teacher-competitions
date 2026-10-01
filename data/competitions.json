@@ -1,26 +1,8 @@
 {
- "updated_at": "2026-10-01T07:02+08:00",
+ "updated_at": "2026-10-02T06:45+08:00",
  "count": 43,
- "open_count": 6,
+ "open_count": 4,
  "items": [
-  {
-   "title": "关于开展第六届小学青年教师语文教学展示与观摩活动的通知",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5145",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-09-29",
-   "deadline": "2026-09-30",
-   "status": "报名中"
-  },
-  {
-   "title": "关于召开中国教育学会地理教学专业委员会2026年综合学术年会本科师范生教学展示交流活动的通知",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5042",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-07-13",
-   "deadline": "2026-09-30",
-   "status": "报名中"
-  },
   {
    "title": "关于开展2026年青少年网络素养培育与创新成果征集活动的通知",
    "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5037",
@@ -355,6 +337,15 @@
    "status": "公示"
   },
   {
+   "title": "关于开展第六届小学青年教师语文教学展示与观摩活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5145",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-09-29",
+   "deadline": "2026-09-30",
+   "status": "已截止"
+  },
+  {
    "title": "2026年全国师生数字素养提升实践活动（第30届教师活动，省级报名9月1-20日）",
    "url": "https://huodong.ncet.edu.cn/hd/dndsteacher",
    "source": "中央电化教育馆",
@@ -379,6 +370,15 @@
    "level": "society",
    "publish_date": "2026-08-17",
    "deadline": "2026-09-20",
+   "status": "已截止"
+  },
+  {
+   "title": "关于召开中国教育学会地理教学专业委员会2026年综合学术年会本科师范生教学展示交流活动的通知",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5042",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-07-13",
+   "deadline": "2026-09-30",
    "status": "已截止"
   },
   {
