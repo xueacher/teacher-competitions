@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-10-28T09:36+08:00",
- "count": 50,
+ "updated_at": "2026-10-29T10:05+08:00",
+ "count": 53,
  "open_count": 3,
  "items": [
   {
@@ -29,6 +29,33 @@
    "publish_date": "2026-01-30",
    "deadline": "2026-12-31",
    "status": "报名中"
+  },
+  {
+   "title": "近三成博士论文摘要被检测出AI文本，博士培养面临新挑战",
+   "url": "https://www.eol.cn/news/guancha/202610/t20261029_2787803.shtml",
+   "source": "中国教育在线",
+   "level": "national",
+   "publish_date": "2026-10-29",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "案例评析：睡不着的孩子和熬着的老师（小学版征稿）",
+   "url": "http://www.bzrzy.cn/2026/1029/c29001a205582/page.htm",
+   "source": "班主任之友杂志",
+   "level": "society",
+   "publish_date": "2026-10-29",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "2027年度中央机关公开遴选和选调公务员10月28日起报名",
+   "url": "https://www.eol.cn/news/yaowen/202610/t20261028_2787534.shtml",
+   "source": "中国教育在线",
+   "level": "national",
+   "publish_date": "2026-10-28",
+   "deadline": null,
+   "status": "进行中"
   },
   {
    "title": "关于第六届中小学心理健康教育课堂教学观摩研讨活动时间、地点变更的通知",
