@@ -1,7 +1,7 @@
 {
- "updated_at": "2026-11-10T12:26+08:00",
- "count": 56,
- "open_count": 5,
+ "updated_at": "2026-11-11T10:08+08:00",
+ "count": 57,
+ "open_count": 4,
  "items": [
   {
    "title": "关于商请推荐教育培训“卓越计划”“领航计划”专家导师和基地学校的函",
@@ -10,15 +10,6 @@
    "level": "society",
    "publish_date": "2026-11-05",
    "deadline": "2026-12-04",
-   "status": "报名中"
-  },
-  {
-   "title": "2026年中小学外语课堂教学观摩示范暨典型教学课例展示活动",
-   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5184",
-   "source": "中国教育学会",
-   "level": "society",
-   "publish_date": "2026-10-30",
-   "deadline": "2026-11-10",
    "status": "报名中"
   },
   {
@@ -382,6 +373,15 @@
    "status": "进行中"
   },
   {
+   "title": "教育部公示2026年度教育部人文社会科学研究专项项目评审结果",
+   "url": "https://www.eol.cn/news/yaowen/202611/t20261110_2792404.shtml",
+   "source": "中国教育在线",
+   "level": "national",
+   "publish_date": "2026-11-10",
+   "deadline": null,
+   "status": "公示"
+  },
+  {
    "title": "2026年度教育部人文社科项目评审结果公示",
    "url": "https://www.eol.cn/news/yaowen/202610/t20261020_2784321.shtml",
    "source": "中国教育在线",
@@ -443,6 +443,15 @@
    "publish_date": "2026-09-18",
    "deadline": null,
    "status": "公示"
+  },
+  {
+   "title": "2026年中小学外语课堂教学观摩示范暨典型教学课例展示活动",
+   "url": "http://www.cse.edu.cn/index/detail.html?category=118&id=5184",
+   "source": "中国教育学会",
+   "level": "society",
+   "publish_date": "2026-10-30",
+   "deadline": "2026-11-10",
+   "status": "已截止"
   },
   {
    "title": "关于开展第六届小学青年教师语文教学展示与观摩活动的通知",
