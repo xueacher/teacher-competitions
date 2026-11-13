@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-11-12T11:18+08:00",
- "count": 57,
+ "updated_at": "2026-11-13T10:53+08:00",
+ "count": 58,
  "open_count": 4,
  "items": [
   {
@@ -38,6 +38,15 @@
    "publish_date": "2026-01-30",
    "deadline": "2026-12-31",
    "status": "报名中"
+  },
+  {
+   "title": "《技能人才评价条例》向社会公开征求意见",
+   "url": "https://www.eol.cn/news/yaowen/202611/t20261112_2793780.shtml",
+   "source": "中国教育在线",
+   "level": "national",
+   "publish_date": "2026-11-12",
+   "deadline": null,
+   "status": "进行中"
   },
   {
    "title": "近三成博士论文摘要被检测出AI文本，博士培养面临新挑战",
