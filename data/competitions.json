@@ -1,6 +1,6 @@
 {
- "updated_at": "2026-11-26T12:20+08:00",
- "count": 59,
+ "updated_at": "2026-11-27T12:36+08:00",
+ "count": 60,
  "open_count": 4,
  "items": [
   {
@@ -38,6 +38,24 @@
    "publish_date": "2026-01-30",
    "deadline": "2026-12-31",
    "status": "报名中"
+  },
+  {
+   "title": "五部门：推进技工教育高质量特色发展，深化工学一体化技能人才培养模式",
+   "url": "https://www.eol.cn/news/yaowen/202611/t20261127_2799837.shtml",
+   "source": "中国教育在线",
+   "level": "national",
+   "publish_date": "2026-11-27",
+   "deadline": null,
+   "status": "进行中"
+  },
+  {
+   "title": "写代码、改论文、想课题，科学家把哪些工作交给了AI？",
+   "url": "https://www.eol.cn/news/guancha/202611/t20261127_2799797.shtml",
+   "source": "中国教育在线",
+   "level": "national",
+   "publish_date": "2026-11-27",
+   "deadline": null,
+   "status": "进行中"
   },
   {
    "title": "案例评析：我收到了一笔赔偿款【中学版征稿】",
@@ -387,15 +405,6 @@
    "source": "班主任之友杂志",
    "level": "society",
    "publish_date": "2026-06-30",
-   "deadline": null,
-   "status": "进行中"
-  },
-  {
-   "title": "案例评析：篮球赛风波（小学案例征稿）",
-   "url": "http://www.bzrzy.cn/2026/0629/c29001a201539/page.htm",
-   "source": "班主任之友杂志",
-   "level": "society",
-   "publish_date": "2026-06-29",
    "deadline": null,
    "status": "进行中"
   },
